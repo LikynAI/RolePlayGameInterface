@@ -45,10 +45,9 @@ namespace GameMaster3000
 		{
 			try
 			{
-				data.Sell(Invemtory.SelectedItem as Object, int.Parse(SellFor.Text));
+				data.Sell(Invemtory.SelectedItem as Object, int.Parse(SellPrice.Text));
 			}
 			catch { }
-			SellFor.Text = "for";
 		}
 
 		private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -58,18 +57,28 @@ namespace GameMaster3000
 
 		private void Break_Click(object sender, RoutedEventArgs e)
 		{
-			data.Repair(Invemtory.SelectedItem as Object);
+			data.Break(Invemtory.SelectedItem as Object);
 		}
 
 		private void Repair_Click(object sender, RoutedEventArgs e)
 		{
-			data.Break(Invemtory.SelectedItem as Object);
+			data.Repair(Invemtory.SelectedItem as Object);
 		}
 
 		private void Random_Click(object sender, RoutedEventArgs e)
 		{
 			Random r = new Random();
 			InfoBox.Text = Convert.ToString(r.Next(1, 7));
+		}
+
+		private void Battle_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void Equip_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

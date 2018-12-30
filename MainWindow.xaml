@@ -1,0 +1,38 @@
+﻿<Window x:Class="GameMaster3000.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameMaster3000"
+        mc:Ignorable="d"
+        Title="GameMaster300" Height="450" Width="800">
+	<Grid>
+		<DataGrid Name="Invemtory" AutoGenerateColumns="False" ItemsSource="{Binding Inventory}" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="490">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" IsReadOnly="True" Width="150"/>
+				<DataGridTextColumn x:Name="Strength" Binding="{Binding Strength}" Header="Hp" IsReadOnly="True" Width="30"/>
+				<DataGridTextColumn x:Name="MaxStrength" Binding="{Binding StringFormat=/{0},Path=MaxStrength, UpdateSourceTrigger=Explicit}" Header="mHp" IsReadOnly="True" Width="37"/>
+				<DataGridTextColumn x:Name="Damage" Binding="{Binding Damage}" Header="Dmg" IsReadOnly="True" Width="40"/>
+				<DataGridTextColumn x:Name="AdditionalAccuracy" Binding="{Binding AdditionalAccuracy}" Header="Acr" IsReadOnly="True" Width="40"/>
+				<DataGridTextColumn x:Name="BlockingAbility" Binding="{Binding BlockingAbility}" Header="Blc" IsReadOnly="True" Width="40"/>
+				<DataGridTextColumn x:Name="Price" Binding="{Binding Price}" Header="Price" IsReadOnly="True" Width="50"/>
+				<DataGridTextColumn x:Name="Equiped"  Header="Equiped" Binding="{Binding on}" IsReadOnly="True" Width="50"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<Button x:Name="AddObject" Content="Add" HorizontalAlignment="Left" Margin="505,134,0,0" VerticalAlignment="Top" Width="75" Click="AddObject_Click"/>
+		<Button x:Name="DeletObject" Content="Delet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="505,161,0,0" Click="DeletObject_Click"/>
+		<Button x:Name="SellObject" Content="Sell" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="505,188,0,0" Click="SellObject_Click"/>
+		<TextBox x:Name="SellPrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" DataContext="{Binding ElementName=Invemtory, Path=SelectedItem}" Text="{Binding Price}" VerticalAlignment="Top" Width="53" Margin="585,190,0,0" RenderTransformOrigin="1.019,0.652"/>
+		<Label Content="Money:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="389,215,0,0"/>
+		<Label x:Name="Money" DataContext="{Binding Money}" Content="{Binding Money}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="438,215,0,0"/>
+		<Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="707,388,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.147,0.591" Click="SaveBtn_Click"/>
+		<TextBox x:Name="InfoBox" HorizontalAlignment="Left" Height="113" Margin="505,10,0,0" TextWrapping="Wrap" DataContext="{Binding ElementName=Invemtory, Path=SelectedItem}" Text="{Binding Info}" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+		<Button x:Name="Break" Content="Break" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="630,37,0,0" Click="Break_Click"/>
+		<Button Content="Reapair" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="630,10,0,0" Click="Repair_Click"/>
+		<Button x:Name="Random" Content="Random" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="630,103,0,0" Click="Random_Click"/>
+		<Button x:Name="Battle" Content="Battle" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Width="75" Click="Battle_Click"/>
+		<Button x:Name="Equip" Content="Equip" HorizontalAlignment="Left" Margin="90,215,0,0" VerticalAlignment="Top" Width="75" Click="Equip_Click"/>
+		<TextBox x:Name="RepairPrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="53" Margin="710,10,0,0" RenderTransformOrigin="1.019,0.652"/>
+	</Grid>
+</Window>

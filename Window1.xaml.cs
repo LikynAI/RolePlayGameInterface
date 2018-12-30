@@ -39,7 +39,7 @@ namespace GameMaster3000
 			try
 			{
 				Object o = new Object();
-				if (!((Class.SelectedItem as string) == "Money")) 
+				if (!((Class.SelectedItem as string) == "Money") && Class.SelectedItem != null) 
 				{
 					if ((Class.SelectedItem as string) == "Object")
 					{

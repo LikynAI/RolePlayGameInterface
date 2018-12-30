@@ -8,5 +8,6 @@ namespace GameMaster3000
 {
     class Hero
     {
+		
     }
 }

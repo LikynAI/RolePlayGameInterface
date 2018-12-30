@@ -17,59 +17,49 @@ namespace GameMaster3000
 
 		public Data()
 		{
-			try
+			Inventory = new ObservableCollection<Object>();
+
+			if (File.Exists(@"GameMaster3000Money.txt") && File.ReadAllText(@"GameMaster3000Money.txt") != string.Empty)
 			{
-				Inventory = new ObservableCollection<Object>();
-
-				if (File.Exists(@"GameMaster3000Money.txt"))
-				{
-					Money = new money(int.Parse(File.ReadAllText(@"GameMaster3000Money.txt")));
-				}
-				else { Money = new money(0); }
-				List<Type> types = new List<Type>
-				{
-				typeof(Object),
-				typeof(Armor),
-				typeof(Weapon)
-				};
-
-				if (File.Exists(@"GameMaster3000Inventory.txt"))
-				{
-					XmlSerializer xmlFormat = new XmlSerializer(Inventory.GetType(), types.ToArray());
-					Stream fStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-					Inventory = (xmlFormat.Deserialize(fStream) as ObservableCollection<Object>);
-					fStream.Close();
-				}
-				else { Inventory = new ObservableCollection<Object>(); }
+				Money = new money(int.Parse(File.ReadAllText(@"GameMaster3000Money.txt")));
 			}
-			catch { }
+			else { Money = new money(0); }
+			List<Type> types = new List<Type>
+			{
+			typeof(Object),
+			typeof(Armor),
+			typeof(Weapon)
+			};
+
+			if (File.Exists(@"GameMaster3000Inventory.txt"))
+			{
+				XmlSerializer xmlFormat = new XmlSerializer(Inventory.GetType(), types.ToArray());
+				Stream fStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+				Inventory = (xmlFormat.Deserialize(fStream) as ObservableCollection<Object>);
+				fStream.Close();
+			}
+			else { Inventory = new ObservableCollection<Object>(); }		
 		}
 
 		public void Save()
 		{
-			try
+			List<Type> types = new List<Type>
 			{
-				List<Type> types = new List<Type>();
-				foreach (Object obj in Inventory)
-				{
-					Type type = obj.GetType();
-					if (!types.Contains(type))
-					{
-						types.Add(type);
-					}
-				}
+			typeof(Object),
+			typeof(Armor),
+			typeof(Weapon)
+			};
 
-				XmlSerializer xmlSerializer = new XmlSerializer(Inventory.GetType(), types.ToArray());
-				Stream fStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-				xmlSerializer.Serialize(fStream, Inventory);
-				fStream.Close();
+			XmlSerializer xmlSerializer = new XmlSerializer(Inventory.GetType(), types.ToArray());
+			Stream fStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+			xmlSerializer.Serialize(fStream, Inventory);
+			fStream.Close();
 
-				if (!(File.Exists(@"GameMaster3000Money.txt")))
-				{
-					File.Create(@"GameMaster3000Money.txt");
-				}
-				File.WriteAllText(@"GameMaster3000Money.txt", Convert.ToString(Money.Money));
-			} catch { }
+			if (!(File.Exists(@"GameMaster3000Money.txt")))
+			{
+				File.Create(@"GameMaster3000Money.txt");
+			}
+			File.WriteAllText(@"GameMaster3000Money.txt", Convert.ToString(Money.Money));		
 		}
 	
 
@@ -83,7 +73,7 @@ namespace GameMaster3000
 
 		internal void Break(Object @object)
 		{
-			if (@object.Strength - 1 > 0)
+			if (@object.Strength > 0)
 			{
 				@object.Strength--;
 			}
@@ -112,9 +102,9 @@ namespace GameMaster3000
 
 		public void Buy(Object o)
 		{
-			if (Money.Money - o.Coast > 0)
+			if (Money.Money - o.Price > 0)
 			{
-				Money.Money -= o.Coast;
+				Money.Money -= o.Price;
 				Add(o);
 			} 
 		}
