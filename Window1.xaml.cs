@@ -54,7 +54,7 @@ namespace GameMaster3000
 					else if ((Class.SelectedItem as string) == "Armor")
 					{
 						o = new Armor(Name.Text, Info.Text, int.Parse(Coast.Text), int.Parse(Strength.Text), 
-							int.Parse(MaxStrength.Text), int.Parse(Damage_or_block.Text));
+							int.Parse(MaxStrength.Text), int.Parse(Damage_or_block.Text), int.Parse(Accuracy.Text));
 					}
 					if ((sender as Button).Name == "Buy")
 					{

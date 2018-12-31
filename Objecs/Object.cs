@@ -40,6 +40,23 @@ namespace GameMaster3000
 
 		public Object() { }
 
+		internal void Repair(money m, int cost)
+		{
+			if (MaxStrength > Strength && m.Money - cost >= 0)
+			{
+				Strength++;
+				m.Money -= cost;
+			}
+		}
+
+		internal void Break()
+		{
+			if (Strength > 0)
+			{
+				Strength--;
+			}
+		}
+
 		public override string ToString()
 		{
 			return Name;

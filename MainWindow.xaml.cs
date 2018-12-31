@@ -57,12 +57,22 @@ namespace GameMaster3000
 
 		private void Break_Click(object sender, RoutedEventArgs e)
 		{
-			data.Break(Invemtory.SelectedItem as Object);
+			if (Invemtory.SelectedItem != null)
+			{
+				(Invemtory.SelectedItem as Object).Break();
+			}
 		}
 
 		private void Repair_Click(object sender, RoutedEventArgs e)
 		{
-			data.Repair(Invemtory.SelectedItem as Object);
+			if(Invemtory.SelectedItem != null)
+				{
+				if (!(int.TryParse(RepairPrice.Text, out int t)))
+				{
+					t = 0;
+				}
+				(Invemtory.SelectedItem as Object).Repair(data.Money,t);
+			}
 		}
 
 		private void Random_Click(object sender, RoutedEventArgs e)
@@ -78,7 +88,7 @@ namespace GameMaster3000
 
 		private void Equip_Click(object sender, RoutedEventArgs e)
 		{
-
+			EquiomentWin eqwin = new EquiomentWin(data);
 		}
 	}
 }

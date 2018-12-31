@@ -61,23 +61,6 @@ namespace GameMaster3000
 			}
 			File.WriteAllText(@"GameMaster3000Money.txt", Convert.ToString(Money.Money));		
 		}
-	
-
-		internal void Repair(Object @object)
-		{
-			if (@object.MaxStrength > @object.Strength)
-			{
-				@object.Strength++;
-			}
-		}
-
-		internal void Break(Object @object)
-		{
-			if (@object.Strength > 0)
-			{
-				@object.Strength--;
-			}
-		}
 
 		internal void Delete(Object @object)
 		{
